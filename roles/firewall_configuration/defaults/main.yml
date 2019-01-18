@@ -1,2 +1,5 @@
 ---
 # defaults file for roles/firewall_configuration
+rule_services:
+  - http
+  - https

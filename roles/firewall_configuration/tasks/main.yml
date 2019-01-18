@@ -1,2 +1,20 @@
 ---
 # tasks file for roles/firewall_configuration
+
+- name: Install firewall package
+  yum:
+    name: firwalld
+ 
+- name: Start firewall service
+  service:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: Add firewall rules
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    immediate: yes
+    permanent: yes
+  loop: "{{ rule_services }}"
