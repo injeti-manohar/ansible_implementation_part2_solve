@@ -21,17 +21,16 @@
   when: ssl_file.stat.exists
 
 - name: copy ssl configuration vhost file
-  copy:
+  template:
     src: https.conf
-    dsst: /etc/httpd/conf.d/
+    dest: /etc/httpd/conf.d/
   notify:
     - restart_service
 
 - name: extract ssl certificates
   unarchive:
-    src: files/ssl.tar.gz
+    src: ssl.tar.gz
     dest: /etc/httpd/conf.d/ssl/
-    copy: no
   notify:
     - restart_service
 
