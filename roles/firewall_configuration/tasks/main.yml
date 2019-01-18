@@ -3,7 +3,7 @@
 
 - name: Install firewall package
   yum:
-    name: firwalld
+    name: firewalld
  
 - name: Start firewall service
   service:
