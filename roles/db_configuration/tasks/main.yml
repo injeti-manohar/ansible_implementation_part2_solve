@@ -35,6 +35,7 @@
   mysql_user:
     name: root
     password: redhat
+  ignore_errors: yes
   when: set_db_root_password
 
 
