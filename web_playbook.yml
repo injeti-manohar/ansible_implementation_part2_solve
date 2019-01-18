@@ -1,0 +1,8 @@
+---
+- name: Play for web configuration
+  hosts: apps
+  tasks:
+    - name: Import web_configuration play
+      import_play:
+        name: web_configuration
+
