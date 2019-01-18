@@ -1,0 +1,5 @@
+---
+# defaults file for roles/web_configuration
+web_package: httpd
+ssl_package: mod_ssl
+web_service: httpd
