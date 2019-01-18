@@ -4,6 +4,9 @@
   yum:
     name: 
       - "{{ db_package}}"
+  notify:
+    - start_service
+
 - name: Install extra packages
   yum:
     name: "{{ extra_packages }}"
@@ -18,10 +21,20 @@
     seuser: system_u
     setype: mysqld_etc_t
     force: yes
-  notify: restart_db
+  notify:
+    - restart_service
+    - set_password
 
 - name: Start db service
   service:
     name: "{{ db_service }}"
     state: started
     enabled: true
+
+- name: set_password
+  mysql_user:
+    name: root
+    password: redhat
+  when: set_db_root_password
+
+

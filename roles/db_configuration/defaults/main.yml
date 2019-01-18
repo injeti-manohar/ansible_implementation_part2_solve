@@ -10,3 +10,5 @@ extra_packages:
   - mariadb-bench
   - mariadb-libs
   - mariadb-test
+
+set_db_root_password: false
