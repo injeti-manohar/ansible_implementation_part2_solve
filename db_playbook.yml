@@ -1,4 +1,5 @@
 ---
+
 - name: Play to setup database and create users
   hosts: appdbs
   become: yes
