@@ -1,0 +1,13 @@
+---
+- name: Play to setup database and create users
+  hosts: appdbs
+  become: yes
+  tasks:
+  - name: Import db_configuration role
+    import_role:
+      name: db_configuration
+
+  - name: Create the MariaDB users
+    user:
+      name: "{{ item }}"
+    loop: "{{ db_users }}"

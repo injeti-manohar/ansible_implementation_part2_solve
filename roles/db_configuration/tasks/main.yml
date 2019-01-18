@@ -1,0 +1,27 @@
+---
+# tasks file for roles/db_configuration
+- name: Install db packages
+  yum:
+    name: 
+      - "{{ db_package}}"
+- name: Install extra packages
+  yum:
+    name: "{{ extra_packages }}"
+
+- name: Copy my.cnf file
+  copy:
+    src: my.cnf
+    dest: "{{ configure_database_path }}"
+    owner: mysql
+    group: mysql
+    mode: 0644
+    seuser: system_u
+    setype: mysqld_etc_t
+    force: yes
+  notify: restart_db
+
+- name: Start db service
+  service:
+    name: "{{ db_service }}"
+    state: started
+    enabled: true

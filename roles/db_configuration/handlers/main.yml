@@ -1,0 +1,7 @@
+---
+# handlers file for roles/db_configuration
+- name: Start db service
+  service:
+    name: "{{ db_service }}"
+    state: restarted
+    enabled: true
