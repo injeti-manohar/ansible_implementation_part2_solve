@@ -3,6 +3,6 @@
   hosts: apps
   tasks:
     - name: Import web_configuration play
-      import_play:
+      import_role:
         name: web_configuration
 
