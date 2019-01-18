@@ -10,5 +10,6 @@ extra_packages:
   - mariadb-bench
   - mariadb-libs
   - mariadb-test
+  - MySQL-python 
 
 set_db_root_password: false
