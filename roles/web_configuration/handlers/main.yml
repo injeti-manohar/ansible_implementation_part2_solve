@@ -1,6 +1,6 @@
 ---
 # handlers file for roles/web_configuration
-- name: restart_service
+- name: restart_web_service
   service:
     name: "{{ web_service }}"
     state: restarted

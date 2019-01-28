@@ -1,0 +1,44 @@
+---
+# tasks file for roles/web_configuration
+- name: Install Web packages
+  yum:
+    name: "{{ web_packages_list }}"
+
+- file:
+    path: /etc/httpd/conf.d/ssl
+    state: directory
+    mode: 0755
+
+- name: verify ssl.conf exist
+  stat:
+    path: /etc/httpd/conf.d/ssl.conf
+  register: ssl_file
+
+- name: ssl.conf backup
+  shell:
+    mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
+  when: ssl_file.stat.exists
+
+- name: copy ssl configuration vhost file
+  template:
+    src: https.conf
+    dest: /etc/httpd/conf.d/
+  notify: restart_web_service
+
+- name: extract ssl certificates
+  unarchive:
+    src: ssl.tar.gz
+    dest: /etc/httpd/conf.d/ssl/
+  notify: restart_web_service
+  
+- name: Copy index content
+  copy:
+    content: "{{ inventory_hostname }} ({{ ansible_default_ipv4.address }}) has been customized by Ansible\n"
+    dest: /var/www/html/index.html
+
+- name: Web service start
+  service:
+    name: "{{ web_service }}"
+    enabled: yes
+    state: started
+

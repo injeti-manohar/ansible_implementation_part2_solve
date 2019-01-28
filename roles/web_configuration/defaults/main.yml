@@ -1,5 +1,8 @@
 ---
 # defaults file for roles/web_configuration
-web_package: httpd
-ssl_package: mod_ssl
 web_service: httpd
+web_packages_list:
+  - httpd
+  - mod_ssl
+  - crypto-utils
+random_var: "This is colon: test"

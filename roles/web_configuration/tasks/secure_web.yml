@@ -1,0 +1,38 @@
+- name: install web server packages
+  yum:
+    name: "{{ web_packages_list }}"
+
+- name: install httpd config files
+  template:
+    src: vhosts.conf.j2
+    dest: /etc/httpd/conf.d/vhosts.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_web_service
+
+- name: create ssl certificate
+  command: openssl req -new -nodes -x509 -subj "/C=US/ST=North Carolina/L=Raleigh/O=Example Inc/CN=app1.{{GUID}}.internal" -days 120 -keyout /etc/pki/tls/private/app1.{{GUID}}.internal.key -out /etc/pki/tls/certs/app1.{{GUID}}.internal.crt -extensions v3_ca
+  args:
+    creates: /etc/pki/tls/certs/app1.{{GUID}}.internal.crt
+
+- name: Create Document Root
+  file:
+    path: /var/www/vhosts/app1-secure
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: deliver content
+  copy:
+    dest: /var/www/vhosts/app1-secure
+    src: index.html
+  notify: restart_web_service
+
+- name: start and enable web services
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
