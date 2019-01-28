@@ -1,0 +1,12 @@
+---
+- name: Play for web configuration
+  hosts: support
+  roles:
+    - role: firewall_configuration
+      rule_services: 
+        - samba
+  tasks:
+    - name: Import samba_configuration play
+      import_role:
+        name: samba_configuration
+
