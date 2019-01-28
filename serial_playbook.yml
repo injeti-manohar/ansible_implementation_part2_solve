@@ -1,0 +1,10 @@
+- name: Create play in project dir
+  hosts: localhost
+  tasks:
+  - name: Copy Play book
+    copy:
+      src: serial_play.yml
+      dest: /home/devops/ansible_implementation/
+      owner: devops
+      group: devops
+      mode: 0644 

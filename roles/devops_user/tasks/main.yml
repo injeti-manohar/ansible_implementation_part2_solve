@@ -23,10 +23,20 @@
     line: '{{ user_name }} ALL=(ALL) NOPASSWD: ALL'
   when: user_is_sudoer
 
-- name: Create  log directory
+- name: Create Project directory for logs
   file:
     path: "{{ devops_project_dir }}"
     state: directory
     owner: devops
     group: devops
     mode: 0775
+  when: inventory_hostname == 'localhost'
+
+- name: Create library 
+  file:
+    path: "{{ devops_project_dir }}/library"
+    state: directory
+    owner: devops
+    group: devops
+    mode: 0775
+  when: inventory_hostname == 'localhost'
