@@ -1,0 +1,6 @@
+---
+# handlers file for roles/mail_configuration
+- name: restart postfix
+  service:   
+    name: postfix
+    state: restarted
