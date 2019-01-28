@@ -25,7 +25,7 @@
 
 - name: Create  log directory
   file:
-    path: /home/devops/ansible_implementation
+    path: "{{ devops_project_dir }}"
     state: directory
     owner: devops
     group: devops

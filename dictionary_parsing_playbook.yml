@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  vars:
+   users:
+    Prakhar:
+      name: Prakhar Srivastava
+      telephone: 667777777
+    Mitesh:
+      name: Mitesh Sharma
+      telephone: 33922999
+  tasks:
+  - import_role:
+      name: devops_user
+  - name: copy dict_facts.yml
+    copy:
+      src: dict_facts.yml
+      dest: "{{ devops_project_dir }}"
+  - name: Print phone records
+    debug:
+      msg: "User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+    loop: "{{ lookup('dict', users) }}"

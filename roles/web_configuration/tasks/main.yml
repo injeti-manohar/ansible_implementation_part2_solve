@@ -4,4 +4,4 @@
 
 - name: Import secure_web tasks
   include_tasks: secure_web.yml
-  when: LAB == '07'
+  when: (LAB == '07') and ( ansible_hostname == "app1" )

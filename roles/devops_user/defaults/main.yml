@@ -6,3 +6,4 @@ primary_server: bastions
 user_password: r3dh4t1!
 copy_ssh_pubkey: yes
 user_is_sudoer: yes
+devops_project_dir: /home/devops/ansible_implementation

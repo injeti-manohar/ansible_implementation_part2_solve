@@ -1,0 +1,8 @@
+- hosts: appdb
+  gather_facts: true
+  tasks:
+  - name: Gather facts
+    setup:
+    register: db_facts
+  - name: Display facts
+    debug: var=db_facts
