@@ -1,5 +1,5 @@
-- hosts: localhost
-  connection: local
+- name: Play to play with dictionary 
+  hosts: apps
   vars:
    users:
     Prakhar:
@@ -9,12 +9,11 @@
       name: Mitesh Sharma
       telephone: 33922999
   tasks:
-  - import_role:
-      name: devops_user
+
   - name: copy dict_facts.yml
     copy:
       src: dict_facts.yml
-      dest: "{{ devops_project_dir }}"
+      dest: /home/devops/ansible_implementation
   - name: Print phone records
     debug:
       msg: "User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"

@@ -1,0 +1,7 @@
+- name: Play to create inventory file
+  hosts: localhost
+  tasks:
+    - name: Copy template 
+      template:
+        src: inventory.j2
+        dest: ./inventory_lab10_hosts
